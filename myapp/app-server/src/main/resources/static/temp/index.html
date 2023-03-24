@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>리액트 예제</title>
+  </head>
+  <style>
+    body {
+      padding: 5px;
+    }
+  </style>
+  <body>
+    <h2>React 예제</h2>
+
+    <!-- 리액트가 생성한 태그가 들어갈 컨테이너 -->
+    <div id="root"></div>
+
+    <!-- 리액트 자바스크립트 CDN 라이브러리 -->
+    <script
+      src="https://unpkg.com/react@18/umd/react.production.min.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+      crossorigin
+    ></script>
+
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <!-- 리액트로 태그를 UI를 생성하는 자바스크립트 코드 -->
+    <script src="test.js"></script>
+
+    <script>
+      class My {
+        play(cb) {
+          cb();
+        }
+        test() {
+          this.play(function () {
+            console.log(this);
+          });
+        }
+      }
+      let obj = new My();
+      obj.test();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BoardFileDao">
+
+  <resultMap type="boardfile" id="boardfileMap">
+    <id column="boardfile_id" property="no"/>
+    <result column="filepath" property="filepath"/>
+    <result column="origin_filename" property="originalFilename"/>
+    <result column="board_id" property="boardNo"/>
+    <result column="mime_type" property="mimeType"/>
+  </resultMap>
+
+  <insert id="insert" parameterType="boardfile">
+    insert into app_board_file(filepath, origin_filename, mime_type, board_id) 
+    values(#{filepath}, #{originalFilename}, #{mimeType}, #{boardNo})
+  </insert>
+  
+  <insert id="insertList" parameterType="list">
+    insert into app_board_file(filepath, origin_filename, mime_type, board_id) 
+    values
+    <foreach collection="list" item="file" separator=",">
+      (#{file.filepath}, #{file.originalFilename}, #{file.mimeType}, #{file.boardNo})
+    </foreach>
+  </insert>
+
+  <select id="findAllOfBoard" resultMap="boardfileMap" parameterType="int">
+    select 
+      boardfile_id, 
+      filepath, 
+      origin_filename, 
+      mime_type, 
+      board_id 
+    from 
+      app_board_file 
+    where 
+      board_id = #{int} 
+    order by 
+      origin_filename asc
+  </select>
+
+  <select id="findByNo" parameterType="int" resultMap="boardfileMap">
+     select 
+      boardfile_id, 
+      filepath, 
+      origin_filename, 
+      mime_type, 
+      board_id 
+    from 
+      app_board_file 
+    where 
+      boardfile_id = #{int} 
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    delete from app_board_file 
+    where boardfile_id=#{no}
+  </delete>
+</mapper>
+
+
+
+
+
